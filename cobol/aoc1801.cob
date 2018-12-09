@@ -57,17 +57,32 @@
       *
        PREPARE-RECORDS.
            OPEN INPUT PUZZLE.
-           READ PUZZLE.
-           PERFORM PROCESS-RECORD UNTIL WS-EOF = 'Y'.
+           READ PUZZLE RECORD.
+           PERFORM PROCESS-RECORD
+               VARYING P FROM 1
+                   BY 1 UNTIL WS-EOF = 'Y'.
            CLOSE PUZZLE.
+           SUBTRACT 1 FROM P.
+           MOVE P TO WS-PUZZLE-COUNT.
            SET P TO 1.
       *
        PREPARE-RECORDS-EXIT.
            EXIT.
       *
+       PROCESS-RECORD.
+           MOVE PUZZLE-CLUE TO WS-PUZZLE-HIST(P).
+           READ PUZZLE RECORD
+               AT END MOVE 'Y' TO WS-EOF
+           END-READ.
+      *
+       PROCESS-RECORD-EXIT.
+           EXIT.
+      *
        PART-1.
            MOVE '1' TO WS-PART-NUM.
-           PERFORM FREQUENCY-SHIFT UNTIL P > WS-PUZZLE-COUNT.
+           PERFORM FREQUENCY-SHIFT THRU FREQUENCY-SHIFT-EXIT
+               VARYING P FROM 1
+                   BY 1 UNTIL P > WS-PUZZLE-COUNT.
            PERFORM DISPLAY-RESULT.
       *
        PART-1-EXIT.
@@ -75,7 +90,9 @@
       *
        PART-2.
            MOVE '2' TO WS-PART-NUM.
-           PERFORM FREQUENCY-SHIFT UNTIL WS-FREQ-MATCH = 'Y'
+           PERFORM FREQUENCY-SHIFT THRU FREQUENCY-SHIFT-EXIT
+               VARYING P FROM 1
+                   BY 1 UNTIL WS-FREQ-MATCH = 'Y'.
            PERFORM DISPLAY-RESULT.
       *
        PART-2-EXIT.
@@ -86,15 +103,6 @@
            DISPLAY 'Part ' WS-PART-NUM ': ' WS-FREQ-DISP.
       *
        DISPLAY-RESULT-EXIT.
-           EXIT.
-      *
-       PROCESS-RECORD.
-           MOVE PUZZLE-CLUE TO WS-PUZZLE-HIST(P).
-           ADD 1 TO WS-PUZZLE-COUNT.
-           ADD 1 TO P.
-           READ PUZZLE RECORD AT END MOVE 'Y' TO WS-EOF END-READ.
-      *
-       PROCESS-RECORD-EXIT.
            EXIT.
       *
        FREQUENCY-SHIFT.
@@ -108,9 +116,8 @@
                    MOVE 'Y' TO WS-FREQ-MATCH
            END-SEARCH.
            MOVE WS-FREQ-HIST-IDX TO F.
-           ADD 1 TO F.
+           SET F UP BY 1.
            MOVE WS-FREQ-LAST TO WS-FREQ-HIST(F).
-           ADD 1 TO P.
       *
        FREQUENCY-SHIFT-EXIT.
            EXIT.
