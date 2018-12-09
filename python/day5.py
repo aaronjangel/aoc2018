@@ -10,9 +10,9 @@ def react(j, k):
         return False
     
 def main():
-    with open('input', 'rb') as input:
+    with open('input', 'rb') as infile:
         units = ['']
-        for k in iter(lambda: str(input.read(1)), b''):
+        for k in iter(lambda: str(infile.read(1)), b''):
             if not k.strip():
                 continue
             j = units[-1]
@@ -24,9 +24,9 @@ def main():
     
     results = {}
     for unit in map(chr, range(ord('a'), ord('z')+1)):
-        input = ''.join(units).translate(None, unit.upper()+unit.lower())
+        data = ''.join(units).translate(None, unit.upper()+unit.lower())
         testunits = ['']
-        for k in input:
+        for k in data:
             j = testunits[-1]
             if react(j, k):
                 testunits.pop()

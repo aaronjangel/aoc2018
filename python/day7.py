@@ -5,8 +5,8 @@ from copy import deepcopy
 steps = []
 root = {}
 
-with open('input') as input:
-    for line in input.readlines():
+with open('input') as infile:
+    for line in infile.readlines():
         _, dep, _, _, _, _, _, step, _, _ = line.split()
         if step not in steps:
             steps.append(step)

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-with open('input') as input:
-    lines = input.readlines()
+with open('input') as infile:
+    lines = infile.readlines()
 
 two = 0
 three = 0

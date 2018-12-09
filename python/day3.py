@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
-import pickle
-
 squares = {}
-with open('input') as input:
-    for line in input:
+with open('input') as infile:
+    for line in infile:
         sid, spec = line.rstrip().split(' @ ')
         loc, size = spec.split(': ')
         x, y = map(int, loc.split(','))
@@ -23,8 +21,8 @@ for x, row in squares.items():
         if square > 1:
             part1 += 1
 
-with open('input') as input:
-    for line in input:
+with open('input') as infile:
+    for line in infile:
         sid, spec = line.rstrip().split(' @ ')
         loc, size = spec.split(': ')
         x, y = map(int, loc.split(','))

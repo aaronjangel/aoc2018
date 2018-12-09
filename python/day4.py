@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-from pprint import pprint
-
-with open('input') as input:
-    lines = sorted(input.readlines())
+with open('input') as infile:
+    lines = sorted(infile.readlines())
 
 guards = {}
 guard = None

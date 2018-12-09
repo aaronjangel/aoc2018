@@ -25,8 +25,8 @@ def main():
     labels = {}
     n = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx'
     i = 0
-    with open('input') as input:
-        for coord in input.readlines():
+    with open('input') as infile:
+        for coord in infile.readlines():
             x, y = map(int, coord.split(','))
             if x > maxx:
                 maxx = x
