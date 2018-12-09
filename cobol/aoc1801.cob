@@ -50,10 +50,10 @@
        PROCEDURE DIVISION.
        MAIN.
            DISPLAY 'Advent of Code 2018, Day 1'
-           PERFORM PREPARE-RECORDS.
-           PERFORM PART-1.
-           PERFORM PART-2.
-           GOBACK.
+           PERFORM PREPARE-RECORDS THRU PREPARE-RECORDS-EXIT.
+           PERFORM PART-1 THRU PART-1-EXIT.
+           PERFORM PART-2 THRU PART-2-EXIT.
+           STOP RUN.
       *
        PREPARE-RECORDS.
            OPEN INPUT PUZZLE.
@@ -62,25 +62,40 @@
            CLOSE PUZZLE.
            SET P TO 1.
       *
+       PREPARE-RECORDS-EXIT.
+           EXIT.
+      *
        PART-1.
            MOVE '1' TO WS-PART-NUM.
            PERFORM FREQUENCY-SHIFT UNTIL P > WS-PUZZLE-COUNT.
            PERFORM DISPLAY-RESULT.
+      *
+       PART-1-EXIT.
+           EXIT.
       *
        PART-2.
            MOVE '2' TO WS-PART-NUM.
            PERFORM FREQUENCY-SHIFT UNTIL WS-FREQ-MATCH = 'Y'
            PERFORM DISPLAY-RESULT.
       *
+       PART-2-EXIT.
+           EXIT.
+      *
        DISPLAY-RESULT.
            MOVE WS-FREQ-LAST TO WS-FREQ-DISP.
            DISPLAY 'Part ' WS-PART-NUM ': ' WS-FREQ-DISP.
+      *
+       DISPLAY-RESULT-EXIT.
+           EXIT.
       *
        PROCESS-RECORD.
            MOVE PUZZLE-CLUE TO WS-PUZZLE-HIST(P).
            ADD 1 TO WS-PUZZLE-COUNT.
            ADD 1 TO P.
            READ PUZZLE RECORD AT END MOVE 'Y' TO WS-EOF END-READ.
+      *
+       PROCESS-RECORD-EXIT.
+           EXIT.
       *
        FREQUENCY-SHIFT.
            IF P > WS-PUZZLE-COUNT SET P TO 1.
@@ -96,3 +111,6 @@
            ADD 1 TO F.
            MOVE WS-FREQ-LAST TO WS-FREQ-HIST(F).
            ADD 1 TO P.
+      *
+       FREQUENCY-SHIFT-EXIT.
+           EXIT.
