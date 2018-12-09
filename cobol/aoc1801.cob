@@ -6,6 +6,8 @@
       * fact that it actually spits out the right answers is, frankly,
       * amazeballs to me.
       *
+      * I mean, if we're going to time travel...might as well try COBOL.
+      *
        IDENTIFICATION DIVISION.
        PROGRAM-ID. AOC1801.
       *
