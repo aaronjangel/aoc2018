@@ -1,3 +1,6 @@
+These are sample real times (wall time) for running both parts of
+a given solution and printing the results.
+
 Day 1 time: 0.10s
 Day 2 time: 0.11s
 Day 3 time: 0.35s
@@ -6,3 +9,4 @@ Day 5 time: 0.13s
 Day 6 time: 3.82s
 Day 7 time: 0.01s
 Day 8 time: 0.06s
+Day 9 time: 2.34s
