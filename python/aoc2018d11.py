@@ -1,8 +1,10 @@
 #!/usr/bin/pypy
 
 from functools import wraps
+import sys
 
 def memoize(f):
+    """Memoize the results of a function given its arguments."""
     memo = {}
 
     @wraps(f)
@@ -68,7 +70,19 @@ def powerlevel(x, y, s, n):
             np += rp
     return np
 
+@memoize
 def maxpower(s, n, maxx=300, maxy=300):
+    """Find the maximum power level for a square.
+
+    args:
+        s (int): serial number
+        n (int): size of the square
+        maxx: maximum x-coordinate
+        maxy: maximum y-coordinate
+
+    returns:
+        both coordinates and the power level
+    """
     p = {(x, y): powerlevel(x, y, s, n)
             for x in range(1, maxx+1) for y in range(1, maxy+1)
             if x-1 <= maxx-n and y-1 <= maxy-n}
@@ -94,11 +108,13 @@ def part2(s):
     return '{},{},{}'.format(x, y, n)
 
 def main():
-    with open('input') as infile:
-        s = int(infile.readline())
+    try:
+        s = int(sys.argv[1])
+    except:
+        print 'usage: {} <serial-number>'.format(sys.argv[0])
+        sys.exit(1)
     print 'Part 1:', part1(s)
     print 'Part 2:', part2(s)
 
 if __name__ == '__main__':
     main()
-
